@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
 
       const name = document.getElementById("registerName").value.trim();
+      
       const email = document.getElementById("registerEmail").value.trim();
       const password = document.getElementById("registerPassword").value;
       const message = document.getElementById("registerMessage");
