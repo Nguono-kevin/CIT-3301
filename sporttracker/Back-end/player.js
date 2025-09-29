@@ -1,5 +1,5 @@
 // models/playerModel.js
-const db = require("../db");
+const db = require("./db");
 
 class Player {
   static add(user_id, player_name, position, callback) {

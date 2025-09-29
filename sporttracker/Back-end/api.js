@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../models/userModel");
-const Workout = require("../models/workoutModel");
-const Player = require("../models/playerModel");
+const User = require("./userModels.js");
+const Workout = require("./workModels.js");
+const Player = require("./player.js");
 
 // Register
 router.post("/register", (req, res) => {

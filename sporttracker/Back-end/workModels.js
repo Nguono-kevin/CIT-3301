@@ -1,5 +1,5 @@
 // models/workoutModel.js
-const db = require("../db");
+const db = require("./db");
 
 class Workout {
   static add(user_id, workout_name, duration, date, callback) {
