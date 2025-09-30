@@ -2,7 +2,7 @@
 const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
-const Workout = require("./workModels.js ");
+const Workout = require("./workModels.js"); // adjust path if in models folder
 
 // Middleware to check JWT
 function verifyToken(req, res, next) {
@@ -18,7 +18,7 @@ function verifyToken(req, res, next) {
 }
 
 // GET all workouts
-router.get("/workouts", verifyToken, (req, res) => {
+router.get("/", verifyToken, (req, res) => {
   Workout.getAll(req.userId, (err, results) => {
     if (err) return res.json({ success: false, error: err.message });
     res.json({ success: true, workouts: results });
@@ -26,22 +26,21 @@ router.get("/workouts", verifyToken, (req, res) => {
 });
 
 // ADD new workout
-router.post("/workouts", verifyToken, (req, res) => {
+router.post("/", verifyToken, (req, res) => {
   const { sport, duration, notes } = req.body;
-  Workout.add(req.userId, sport, duration, notes, (err, result) => {
+  Workout.add(req.userId, sport, duration, notes, (err) => {
     if (err) return res.json({ success: false, error: err.message });
     res.json({ success: true, message: "Workout added!" });
   });
 });
 
 // DELETE a workout
-router.delete("/workouts/:id", verifyToken, (req, res) => {
+router.delete("/:id", verifyToken, (req, res) => {
   const id = req.params.id;
-  Workout.delete(id, req.userId, (err, result) => {
+  Workout.delete(id, req.userId, (err) => {
     if (err) return res.json({ success: false, error: err.message });
     res.json({ success: true, message: "Workout deleted!" });
   });
 });
 
 module.exports = router;
-const db = require("./db");

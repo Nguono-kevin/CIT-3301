@@ -1,4 +1,4 @@
-const db = require("../db");
+const db = require("./db");
 
 class Player {
   static create(userId, playerName, sport, age, callback) {
