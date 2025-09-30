@@ -1,17 +1,24 @@
-// models/workoutModel.js
 const db = require("./db");
 
 class Workout {
-  static add(user_id, workout_name, duration, date, callback) {
+  static create(userId, playerId, sport, duration, notes, callback) {
     db.query(
-      "INSERT INTO workouts (user_id, workout_name, duration, date) VALUES (?, ?, ?, ?)",
-      [user_id, workout_name, duration, date],
+      "INSERT INTO workouts (user_id, player_id, sport, duration, notes) VALUES (?, ?, ?, ?, ?)",
+      [userId, playerId || null, sport, duration, notes],
       callback
     );
   }
 
-  static getByUser(user_id, callback) {
-    db.query("SELECT * FROM workouts WHERE user_id = ?", [user_id], callback);
+  static getAllByUser(userId, callback) {
+    db.query(
+      "SELECT w.*, p.player_name FROM workouts w LEFT JOIN players p ON w.player_id = p.id WHERE w.user_id = ?",
+      [userId],
+      callback
+    );
+  }
+
+  static delete(workoutId, callback) {
+    db.query("DELETE FROM workouts WHERE id = ?", [workoutId], callback);
   }
 }
 

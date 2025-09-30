@@ -1,17 +1,20 @@
-// models/playerModel.js
-const db = require("./db");
+const db = require("../db");
 
 class Player {
-  static add(user_id, player_name, position, callback) {
+  static create(userId, playerName, sport, age, callback) {
     db.query(
-      "INSERT INTO players (user_id, player_name, position) VALUES (?, ?, ?)",
-      [user_id, player_name, position],
+      "INSERT INTO players (user_id, player_name, sport, age) VALUES (?, ?, ?, ?)",
+      [userId, playerName, sport, age],
       callback
     );
   }
 
-  static getByUser(user_id, callback) {
-    db.query("SELECT * FROM players WHERE user_id = ?", [user_id], callback);
+  static getAllByUser(userId, callback) {
+    db.query("SELECT * FROM players WHERE user_id = ?", [userId], callback);
+  }
+
+  static delete(playerId, callback) {
+    db.query("DELETE FROM players WHERE id = ?", [playerId], callback);
   }
 }
 
